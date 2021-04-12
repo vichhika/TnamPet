@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_lang"
+        android:orderInCategory="100"
+        android:title="@string/menu_lang"
+        android:icon="@drawable/ic_menu_lang"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/lang_english"
+                android:orderInCategory="100"
+                android:title="@string/lang_english"
+                android:icon="@drawable/ic_united_kingdom"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/lang_khmer"
+                android:orderInCategory="100"
+                android:title="@string/lang_khmer"
+                android:icon="@drawable/ic_cambodia"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+</menu>
