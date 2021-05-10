@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ccc">#ccc</color>
+    <color name="danger">#cc3300</color>
+    <color name="green_header">#99cc33</color>
+    <color name="red_header">#ff9966</color>
 </resources>

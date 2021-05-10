@@ -1,16 +1,20 @@
 package com.stem303.tnampet;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.stem303.tnampet.ui.bookmark.BookmarkFragment;
+import com.stem303.tnampet.ui.home.DetailFragment;
 import com.stem303.tnampet.ui.home.HomeFragment;
 
 import androidx.annotation.NonNull;
@@ -35,41 +39,64 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MenuItem menuLang;
-    private Locale locale = Locale.getDefault();
+    MenuItem menuLang;
+    Locale locale;
+    Toolbar toolbar;
+    NavigationView navigationView;
+    HomeFragment homeFragment;
+    BookmarkFragment bookmarkFragment;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locale = Locale.getDefault();
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        HomeFragment homeFragment = new HomeFragment();
-        BookmarkFragment bookmarkFragment = new BookmarkFragment();
-        goToFragment(homeFragment,true);
+        homeFragment = new HomeFragment();
+        bookmarkFragment = new BookmarkFragment();
+        goToFragment(homeFragment);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if(id == R.id.nav_home){
-                    goToFragment(homeFragment, true);
+                    goToFragment(homeFragment);
                 }
                 else if(id == R.id.nav_bookmark){
-                    goToFragment(bookmarkFragment, false);
+                    goToFragment(bookmarkFragment);
                 }
                 drawer.findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
+                Log.d("navbar", "onNavigationItemSelected: "+navigationView.getCheckedItem().getItemId());
                 return true;
+            }
+        });
+
+        EditText editText = findViewById(R.id.search_toolbar);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                homeFragment.getFilter().filter(editable.toString().toLowerCase());
             }
         });
 
@@ -102,14 +129,40 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        String activeFregment = getSupportFragmentManager().findFragmentById(R.id.nav_fragment_container).getClass().getSimpleName();
+        if(!activeFregment.equals(HomeFragment.class.getSimpleName())){
+            goToFragment(homeFragment);
+            navigationView.setCheckedItem(R.id.nav_home);
+        }else{
+            super.onBackPressed();
+        }
     }
 
-    void goToFragment(Fragment fragment, boolean isTop){
+    public void goToFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.nav_fragment_container, fragment);
-        if(!isTop) fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        String activeFregment = getSupportFragmentManager().findFragmentById(R.id.nav_fragment_container).getClass().getSimpleName();
+        if(activeFregment.equals(BookmarkFragment.class.getSimpleName())){
+            menuLang.setVisible(false);
+            toolbar.findViewById(R.id.search_toolbar).setVisibility(View.GONE);
+            toolbar.setTitle("Bookmark");
+        }else if(activeFregment.equals(HomeFragment.class.getSimpleName())){
+            menuLang.setVisible(true);
+            toolbar.findViewById(R.id.search_toolbar).setVisibility(View.VISIBLE);
+            toolbar.setTitle("Home");
+        }else if(activeFregment.equals(DetailFragment.class.getSimpleName())){
+            menuLang.setVisible(false);
+            toolbar.findViewById(R.id.search_toolbar).setVisibility(View.GONE);
+            toolbar.setTitle("Definition");
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
 }
