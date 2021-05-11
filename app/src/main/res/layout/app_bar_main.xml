@@ -30,7 +30,7 @@
                 android:drawableTint="@color/ccc"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:hint="Search"
+                android:hint="@string/search_bar"
                 android:textColorHint="#ccc"
                 android:background="@drawable/box_radius"/>
 

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">ថ្នាំពេទ្យ</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">ទំព័រដើម</string>
+    <string name="menu_bookmark">កត់ចំណាំ</string>
+    <string name="menu_information">បន្តែម</string>
+    <string name="menu_help">ជំនួយ</string>
+    <string name="menu_contact_us">ទំនាក់ទំនង</string>
+    <string name="menu_rate">វាយតំលៃ</string>
+    <string name="menu_share">ចែករំលែក</string>
+    <string name="menu_lang">ភាសា</string>
+    <string name="lang_english">អង់គ្លេស</string>
+    <string name="lang_khmer">ខ្មែរ</string>
+    <string name="search_bar">ស្វែងរក</string>
+    <string name="definition">មើលលំអិត</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

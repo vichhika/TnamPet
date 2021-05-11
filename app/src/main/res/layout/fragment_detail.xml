@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.DetailFragment"
     android:padding="10dp">
 
@@ -110,6 +111,12 @@
                     android:textColor="@color/white"
                     android:background="@drawable/box_radius"
                     android:backgroundTint="@color/green_header"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="3dp">
+
+                </androidx.cardview.widget.CardView>
                 <TextView
                     android:layout_marginTop="5dp"
                     android:id="@+id/detail_usage_content"
@@ -119,7 +126,8 @@
                     android:text="content"
                     android:textColor="@color/black"
                     android:textSize="13dp"
-                    android:background="@drawable/box_radius"/>
+                    android:background="@drawable/box_radius"
+                    android:backgroundTint="@color/ccc"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -17,6 +17,8 @@
     <string name="menu_lang">Language</string>
     <string name="lang_english">English</string>
     <string name="lang_khmer">Khmer</string>
+    <string name="search_bar">Search</string>
+    <string name="definition">Detail</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

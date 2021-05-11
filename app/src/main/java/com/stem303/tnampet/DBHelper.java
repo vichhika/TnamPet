@@ -25,7 +25,18 @@ public class BookmarkDBHelper extends SQLiteOpenHelper {
     public static final String usage = "usage";
     public static final String usage_content = "usage_content";
 
-    private static String CREATE_TABLE = "CREATE TABLE bookmark (\n" +
+    private static String CREATE_BOOKMARK_TABLE = "CREATE TABLE bookmark (\n" +
+            "        id    INTEGER,\n" +
+            "        title TEXT,\n" +
+            "        intro_content TEXT,\n" +
+            "        side_effect   TEXT,\n" +
+            "        side_effect_content   TEXT,\n" +
+            "        warning       TEXT,\n" +
+            "        warning_content      TEXT,\n" +
+            "        usage TEXT,\n" +
+            "        usage_content TEXT,\n" +
+            "        PRIMARY KEY(id));";
+    private static String CREATE_HOME_TABLE = "CREATE TABLE home (\n" +
             "        id    INTEGER,\n" +
             "        title TEXT,\n" +
             "        intro_content TEXT,\n" +
@@ -44,7 +55,8 @@ public class BookmarkDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-            sqLiteDatabase.execSQL(CREATE_TABLE);
+            sqLiteDatabase.execSQL(CREATE_BOOKMARK_TABLE);
+        sqLiteDatabase.execSQL(CREATE_HOME_TABLE);
     }
 
     @Override
