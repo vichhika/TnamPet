@@ -29,6 +29,10 @@ public class TnampetItem implements Serializable {
         this.usage_content = usage_content;
     }
 
+    public TnampetItem() {
+
+    }
+
     public int getId() {
         return id;
     }

@@ -67,7 +67,6 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mRecyclerView.setAdapter(tnampetAdapter);
-        jsonParse();
         return view;
     }
 
@@ -81,7 +80,7 @@ public class HomeFragment extends Fragment {
         super.onDetach();
     }
 
-    private void jsonParse(){
+    public void fetchData(){
         final ProgressDialog progressDialog = new ProgressDialog(this.getContext());
         progressDialog.setMessage("Loading...");
         progressDialog.show();

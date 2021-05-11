@@ -1,5 +1,6 @@
 package com.stem303.tnampet;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     HomeFragment homeFragment;
     BookmarkFragment bookmarkFragment;
+    InputMethodManager inputMethodManager;
+    EditText editText;
 
 
 
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         locale = Locale.getDefault();
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.home_toolbar);
+        editText = findViewById(R.id.search_toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -61,10 +66,9 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         homeFragment = new HomeFragment();
         bookmarkFragment = new BookmarkFragment();
-        goToFragment(homeFragment);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        EditText editText = findViewById(R.id.search_toolbar);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -100,9 +103,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        goToFragment(homeFragment);
+
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String activeFregment = getSupportFragmentManager().findFragmentById(R.id.nav_fragment_container).getClass().getSimpleName();
+        if(activeFregment.equals(HomeFragment.class.getSimpleName())){
+            homeFragment.fetchData();
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.nav_fragment_container, fragment);
-        //fragmentTransaction.addToBackStack(null);
+        inputMethodManager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        editText.getText().clear();
         fragmentTransaction.commit();
     }
 

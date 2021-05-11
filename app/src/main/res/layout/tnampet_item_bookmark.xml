@@ -9,7 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:padding="2dp">
 
         <TextView
             android:id="@+id/tnampet_bookmark_title"
@@ -24,6 +25,7 @@
             android:layout_margin="10dp"/>
 
         <ImageView
+            android:id="@+id/tnampet_bookmark_clear"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentRight="true"
@@ -31,7 +33,8 @@
             android:src="@drawable/ic_clear"
             android:background="@drawable/box_radius"
             android:backgroundTint="@color/danger"
-            android:tint="@color/white"/>
+            android:tint="@color/white"
+            android:layout_marginRight="10dp"/>
 
     </RelativeLayout>
 
