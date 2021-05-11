@@ -1,8 +1,13 @@
 package com.stem303.tnampet;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.audiofx.DynamicsProcessing;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -83,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(id == R.id.nav_bookmark){
                     goToFragment(bookmarkFragment);
+                }else if(id == R.id.nav_contact_us){
+                    Uri uri = Uri.parse("https://github.com/vichhika");
+                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(intent);
+                }else if(id == R.id.nav_rate){
+                    Uri uri = Uri.parse("https://www.facebook.com/%E1%9E%90%E1%9F%92%E1%9E%93%E1%9E%B6%E1%9F%86%E1%9E%96%E1%9F%81%E1%9E%91%E1%9F%92%E1%9E%99-App-103047508634587");
+                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(intent);
+                }else if(id == R.id.nav_share){
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    String title = " \uD83D\uDC49 \uD83D\uDC49 \uD83D\uDC49តោះ! ដោនលូតកម្មវិធីថ្នាំពេទ្យទាំងអស់គ្នា ដើម្បីចំណេះដឹងសុខភាពទាំងអស់គ្នា។\uD83D\uDE0E \n\n \uD83D\uDC47\uD83D\uDC47\uD83D\uDC47";
+                    String content = "https://cutt.ly/SbSlOT1";
+                    intent.putExtra(Intent.EXTRA_SUBJECT,title);
+                    intent.putExtra(Intent.EXTRA_TEXT,content);
+                    startActivity(Intent.createChooser(intent,"Share through"));
+                }else if(id == R.id.nav_help){
+                    helpPopup();
                 }
                 drawer.findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
@@ -189,6 +213,21 @@ public class MainActivity extends AppCompatActivity {
             toolbar.setTitle(R.string.definition);
         }
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void helpPopup(){
+        Button button;
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_help);
+        button = dialog.findViewById(R.id.ok_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
 }

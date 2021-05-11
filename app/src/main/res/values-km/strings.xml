@@ -19,6 +19,7 @@
     <string name="lang_khmer">ខ្មែរ</string>
     <string name="search_bar">ស្វែងរក</string>
     <string name="definition">មើលលំអិត</string>
+    <string name="ok">យល់ព្រម</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

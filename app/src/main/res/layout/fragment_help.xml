@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="520dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/box_radius"
+    android:layout_gravity="center"
+    android:backgroundTint="@color/cardview_dark_background"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/box_radius"
+        android:backgroundTint="@color/white">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"/>
+    </FrameLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-32dp"
+        android:src="@mipmap/ic_launcher"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ថ្នាំពេទ្យ​ App"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.0.1"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="11dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_margin="10dp"
+        android:text="ថ្នាំពេទ្យ គឺជា Application មួយដែលបង្កើតមកដើម្បីជួយសម្រួលដល់ប្រជាជនទូទៅទាំងអស់ឲ្យយល់អំពីរបៀបប្រើប្រាស់ថ្នាំសំរាប់ព្យាបាលជំងឺជាលក្ខណបែបបឋម។\n\nវិធីប្រើប្រាស់គឺសាមញ្ញបំផុត:\n\t- យើងអាចស្វែងរកឈ្មោះថ្នាំនៅក្នុង App នេះ\n\t- យើងអាចអានបន្ថែមអំពីរបៀបប្រើប្រាស់របស់ថ្នាំនីមួយៗ\n\t- យើងអាចរក្សា រឺ កត់ចំណាំចំពោះថ្នាំណាដែលសំខាន់សំរាប់អ្នក\n\nអ្នកអាចប្រើ App នេះជាមួយ internet ក៏បាន អត់ក៏បាន។"
+        android:textColor="@color/white"
+        android:background="@drawable/box_radius"
+        android:backgroundTint="@color/material_on_background_disabled"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:layout_gravity="center"
+        android:background="@drawable/box_radius"/>
+
+
+</LinearLayout>
