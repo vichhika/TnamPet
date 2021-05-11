@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.stem303.tnampet.BookmarkDBHelper;
+import com.stem303.tnampet.DBHelper;
 import com.stem303.tnampet.R;
 import com.stem303.tnampet.ui.recycleView.BookmarkAdapter;
 import com.stem303.tnampet.ui.recycleView.TnampetItem;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class BookmarkFragment extends Fragment {
 
-    private BookmarkDBHelper bookmarkDBHelper;
+    private DBHelper bookmarkDBHelper;
     private ArrayList<TnampetItem> tnampetItems = new ArrayList<>();
     private BookmarkAdapter bookmarkAdapter;
     private RecyclerView recyclerView;
@@ -48,7 +48,7 @@ public class BookmarkFragment extends Fragment {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_bookmark, container, false);
-        bookmarkDBHelper = new BookmarkDBHelper(this.getContext());
+        bookmarkDBHelper = new DBHelper(this.getContext());
         bookmarkAdapter = new BookmarkAdapter(this,tnampetItems);
         recyclerView = view.findViewById(R.id.recyclerview_bookmark);
         recyclerView.setHasFixedSize(true);
@@ -80,13 +80,13 @@ public class BookmarkFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public BookmarkDBHelper getDB(){
+    public DBHelper getDB(){
         return bookmarkDBHelper;
     }
 
     private void retriveData(){
         tnampetItems.clear();
-        Cursor cursor = bookmarkDBHelper.onRetriveAll();
+        Cursor cursor = bookmarkDBHelper.onRetriveAll(DBHelper.BOOKMARK_TABLE);
         SQLiteDatabase db = bookmarkDBHelper.getReadableDatabase();
         try {
             while (cursor.moveToNext()){

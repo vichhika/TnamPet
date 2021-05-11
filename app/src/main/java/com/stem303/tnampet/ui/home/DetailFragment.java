@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,9 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.stem303.tnampet.BookmarkDBHelper;
+import com.stem303.tnampet.DBHelper;
 import com.stem303.tnampet.R;
-import com.stem303.tnampet.ui.recycleView.BookmarkAdapter;
 import com.stem303.tnampet.ui.recycleView.TnampetItem;
 
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 public class DetailFragment extends Fragment {
 
     private TnampetItem tnampetItem;
-    private BookmarkDBHelper bookmarkDBHelper;
+    private DBHelper bookmarkDBHelper;
     private MenuItem item;
 
     public DetailFragment() {
@@ -45,7 +43,7 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         setHasOptionsMenu(true);
-        bookmarkDBHelper = new BookmarkDBHelper(this.getContext());
+        bookmarkDBHelper = new DBHelper(this.getContext());
         tnampetItem = (TnampetItem) getArguments().getSerializable("tnampetItem");
         ArrayList<TextView> textViews = new ArrayList<>();
         textViews.add(view.findViewById(R.id.detail_title));
@@ -81,7 +79,7 @@ public class DetailFragment extends Fragment {
             bookmarkDBHelper.onRemove(tnampetItem.getId());
         }else {
             item.setIcon(R.drawable.ic_marked);
-            bookmarkDBHelper.onInsert(tnampetItem);
+            bookmarkDBHelper.onInsert(tnampetItem,DBHelper.BOOKMARK_TABLE);
         }
         return super.onOptionsItemSelected(item);
     }

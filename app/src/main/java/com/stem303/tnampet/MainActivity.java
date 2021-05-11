@@ -1,9 +1,12 @@
 package com.stem303.tnampet;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Config;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -124,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         menuLang = menu.findItem(R.id.nav_lang);
-        if (locale.toString() == "en_US") menuLang.setIcon(getDrawable(R.drawable.ic_united_kingdom));
-        else if (locale.toString() == "km_KH") menuLang.setIcon(getDrawable(R.drawable.ic_cambodia));
-        Log.d("locale",locale.toString());
+        if (locale.toString().equals("en_US")) menuLang.setIcon(getDrawable(R.drawable.ic_united_kingdom));
+        else if (locale.toString().equals("km_KH")) menuLang.setIcon(getDrawable(R.drawable.ic_cambodia));
         return true;
     }
 
@@ -135,8 +138,16 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 //        SharedPref.saveState(this,"lang_id",String.valueOf(id));
-        if (id == R.id.lang_khmer) menuLang.setIcon(getDrawable(R.drawable.ic_cambodia));
-        else if(id != R.id.nav_lang) menuLang.setIcon(getDrawable(R.drawable.ic_united_kingdom));
+        if (id == R.id.lang_khmer) {
+            menuLang.setIcon(getDrawable(R.drawable.ic_cambodia));
+            Toast.makeText(this,"Function not available",Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.lang_english) {
+            menuLang.setIcon(getDrawable(R.drawable.ic_united_kingdom));
+            Toast.makeText(this,"Function not available",Toast.LENGTH_SHORT).show();
+        }else if(id == R.id.action_clear) {
+            Toast.makeText(this,"All clear",Toast.LENGTH_SHORT).show();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -167,15 +178,15 @@ public class MainActivity extends AppCompatActivity {
         if(activeFregment.equals(BookmarkFragment.class.getSimpleName())){
             menuLang.setVisible(false);
             toolbar.findViewById(R.id.search_toolbar).setVisibility(View.GONE);
-            toolbar.setTitle("Bookmark");
+            toolbar.setTitle(R.string.menu_bookmark);
         }else if(activeFregment.equals(HomeFragment.class.getSimpleName())){
             menuLang.setVisible(true);
             toolbar.findViewById(R.id.search_toolbar).setVisibility(View.VISIBLE);
-            toolbar.setTitle("Home");
+            toolbar.setTitle(R.string.menu_home);
         }else if(activeFregment.equals(DetailFragment.class.getSimpleName())){
             menuLang.setVisible(false);
             toolbar.findViewById(R.id.search_toolbar).setVisibility(View.GONE);
-            toolbar.setTitle("Definition");
+            toolbar.setTitle(R.string.definition);
         }
         return super.onPrepareOptionsMenu(menu);
     }
