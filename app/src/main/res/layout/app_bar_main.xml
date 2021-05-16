@@ -38,9 +38,25 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+
     <FrameLayout
         android:id="@+id/nav_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-1657301049870081/6165475915">
+        </com.google.android.gms.ads.AdView>
+
+    </FrameLayout>
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

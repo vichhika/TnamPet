@@ -22,6 +22,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     BookmarkFragment bookmarkFragment;
     InputMethodManager inputMethodManager;
     EditText editText;
+    AdView mAdView;
 
 
 
@@ -67,6 +73,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         locale = Locale.getDefault();
         setContentView(R.layout.activity_main);
+
+        //Add advertise
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //End Add advertise
+
         toolbar = findViewById(R.id.home_toolbar);
         editText = findViewById(R.id.search_toolbar);
         setSupportActionBar(toolbar);
